@@ -6,6 +6,8 @@
 
 **Implementation blueprints:** See [MVP Software Factory: Eight Executive Submissions](MVP_FACTORY_BLUEPRINTS.md) for the PO, BA, engineering, and QA plan for every pain point.
 
+**Runnable MVPs:** See [IMPLEMENTATION.md](IMPLEMENTATION.md). The factory console lives in `web/` (`npm test` / `npm run dev`).
+
 ## Executive summary
 
 The strongest opportunities are not new all-in-one systems. They are narrow **control layers** that sit on top of software a business already uses:
