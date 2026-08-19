@@ -1,0 +1,6 @@
+create table properties (id uuid primary key default gen_random_uuid(), organization_id uuid not null, label text not null);
+create table work_orders (id uuid primary key default gen_random_uuid(), property_id uuid references properties, summary text not null, tenant_contact text, status text not null default 'new', due_at timestamptz, evidence_policy jsonb not null default '{"afterPhotos":1}');
+create table assignments (id uuid primary key default gen_random_uuid(), work_order_id uuid references work_orders, vendor_name text not null, vendor_contact text not null, token_hash text not null unique, expires_at timestamptz not null, accepted_at timestamptz);
+create table updates (id bigint generated always as identity primary key, work_order_id uuid references work_orders, actor text not null, status text not null, note text, created_at timestamptz default now());
+create table photos (id uuid primary key default gen_random_uuid(), work_order_id uuid references work_orders, kind text check(kind in ('before','after')), storage_path text not null, sha256 text not null);
+create table notifications (id uuid primary key default gen_random_uuid(), work_order_id uuid references work_orders, template text not null, recipient_hash text not null, sent_at timestamptz, unique(work_order_id, template));

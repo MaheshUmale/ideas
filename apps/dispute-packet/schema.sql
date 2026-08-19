@@ -1,0 +1,4 @@
+create table shops (id uuid primary key default gen_random_uuid(), shop_domain text unique not null, access_token_ciphertext text not null, uninstalled_at timestamptz);
+create table disputes (id uuid primary key default gen_random_uuid(), shop_id uuid references shops, external_id text, reason_code text not null, amount_cents bigint not null, due_at timestamptz not null, status text not null, unique(shop_id, external_id));
+create table evidence_items (id uuid primary key default gen_random_uuid(), dispute_id uuid references disputes, kind text not null, source text not null, occurred_at timestamptz, storage_path text, facts jsonb not null default '{}', sha256 text);
+create table packet_versions (id uuid primary key default gen_random_uuid(), dispute_id uuid references disputes, version int not null, storage_path text not null, sha256 text not null, created_at timestamptz default now(), unique(dispute_id, version));

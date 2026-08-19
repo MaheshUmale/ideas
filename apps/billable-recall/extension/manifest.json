@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "BillableRecall",
+  "version": "0.1.0",
+  "description": "Private local timeline from allow-listed domains. Nothing uploads until you approve.",
+  "permissions": ["tabs", "idle", "storage", "alarms"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "popup.html" },
+  "options_page": "options.html"
+}

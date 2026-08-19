@@ -1,0 +1,5 @@
+create table vendors (id uuid primary key default gen_random_uuid(), organization_id uuid not null, name text not null);
+create table invoices (id uuid primary key default gen_random_uuid(), vendor_id uuid references vendors, invoice_number text not null, invoice_date date, storage_path text not null, sha256 text not null, status text not null default 'queued', unique(vendor_id, invoice_number));
+create table catalog_items (id uuid primary key default gen_random_uuid(), vendor_id uuid references vendors, vendor_sku text, canonical_name text not null, base_unit text not null, units_per_pack numeric not null);
+create table invoice_lines (id uuid primary key default gen_random_uuid(), invoice_id uuid references invoices, catalog_item_id uuid references catalog_items, raw_description text not null, quantity numeric, pack_text text, line_total_cents bigint, unit_price_micros bigint, confidence numeric, verified_at timestamptz);
+create table price_alerts (id uuid primary key default gen_random_uuid(), invoice_line_id uuid unique references invoice_lines, prior_unit_price_micros bigint not null, change_bps int not null, status text not null default 'new');

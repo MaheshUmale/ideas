@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>BillableRecall options</title>
+<body style="font: 16px sans-serif; max-width: 40rem; padding: 2rem">
+  <h1>Allow-listed hosts</h1>
+  <p>Only these hostnames are stored. Paths, titles, and page contents are never recorded.</p>
+  <textarea id="hosts" rows="8" style="width: 100%">github.com
+app.linear.app
+docs.google.com</textarea>
+  <p><button id="save">Save locally</button></p>
+  <script>
+    const el = document.getElementById("hosts");
+    chrome.storage.local.get("allowlist").then(({ allowlist }) => {
+      if (allowlist?.length) el.value = allowlist.join("\n");
+    });
+    document.getElementById("save").onclick = () => {
+      chrome.storage.local.set({
+        allowlist: el.value.split("\n").map((s) => s.trim()).filter(Boolean),
+      });
+    };
+  </script>
+</body>
