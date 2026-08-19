@@ -1,0 +1,14 @@
+<form id="generate">
+  <label>Client <select id="client"></select></label>
+  <label>Template URL <input id="template" required /></label>
+  <button>Validate and generate</button>
+</form>
+<script>
+  document.querySelector("#generate").onsubmit = (e) => {
+    e.preventDefault();
+    google.script.run.withSuccessHandler((id) => alert(`Created ${id}`)).generateReport({
+      client: client.value,
+      template: template.value,
+    });
+  };
+</script>
