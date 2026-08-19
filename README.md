@@ -4,6 +4,8 @@
 
 **Scope:** Reddit, Indie Hackers, and product-support communities, with emphasis on repeated, costly workflows rather than generic “I wish this existed” posts.
 
+**Implementation blueprints:** See [MVP Software Factory: Eight Executive Submissions](MVP_FACTORY_BLUEPRINTS.md) for the PO, BA, engineering, and QA plan for every pain point.
+
 ## Executive summary
 
 The strongest opportunities are not new all-in-one systems. They are narrow **control layers** that sit on top of software a business already uses:
